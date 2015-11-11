@@ -66,11 +66,11 @@ angular.module('ui.dashboard')
           stop: function () {
             scope.saveDashboard();
           },
-          handle: '.widget-header',
+          handle: '.widget-header:not(.not-sortable)',
+          items: '.widget-container:not(.not-sortable)',
           distance: 5
         };
         scope.sortableOptions = angular.extend({}, sortableDefaults, scope.options.sortableOptions || {});
-
       }],
       link: function (scope) {
 

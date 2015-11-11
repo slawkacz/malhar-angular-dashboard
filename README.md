@@ -56,11 +56,11 @@ Widget Library using the dashboard [[source code](https://github.com/DataTorrent
 Build
 -----
 
- Project is built with Grunt.
+ Project is built with Gulp.
 
  ``` bash
-    $ npm install -g grunt-cli
-    $ grunt
+    $ npm install
+    $ gulp
  ```
 
 Requirements
@@ -80,11 +80,11 @@ Getting Started
 
 See [simple demo](demo) (two widgets) for a quick start.
 
-Running demo with Grunt.
+Running demo with Gulp.
 
  ``` bash
     $ bower install
-    $ grunt demo
+    $ gulp build:demo
  ```
 
 Application will be available at http://127.0.0.1:9000
@@ -107,8 +107,8 @@ Download the zip of this repo and use the files in the `dist` folder.
 Load `dist/angular-ui-dashboard.js` and `dist/angular-ui-dashboard.css` in your html:
 
 ```HTML
-<link rel="stylesheet" href="bower_components/malhar-angular-dashboard/dist/angular-ui-dashboard.css">
-<script src="bower_components/malhar-angular-dashboard/dist/angular-ui-dashboard.js"></script>
+<link rel="stylesheet" href="bower_components/malhar-angular-dashboard/dist/malhar-angular-dashboard.css">
+<script src="bower_components/malhar-angular-dashboard/dist/malhar-angular-dashboard.js"></script>
 ```
 
 Also be sure to add it to your apps dependency list:
@@ -163,6 +163,11 @@ It is possible to use your own template for the dashboard and widget markup (rep
 |  sortableOptions | Object | n/a | no | Allows to specify the various [sortable options](http://api.jqueryui.com/sortable/#options) of the underlying jQuery UI Sortable.
 | hideWidgetSettings | Boolean | false | no | If true, the cog button in the top right corner of each widget will not be present. |
 | hideWidgetClose    | Boolean | false | no | If true, the "x" button in the top right corner of each widget will not be present. |
+| hideSaveButton    | Boolean | false | no | If true, the "Save Changes" button in widget buttons area will not be presented. |
+| hideResetDefaultButton    | Boolean | false | no | If true, the "Default Widget" button in widget buttons area will not be present. |
+| hideClearButton    | Boolean | false | no | If true, the "Clear" button in widget buttons area will not be present. |
+| resizable    | Boolean | false | no | Option to enable/disable resize. |
+| sortable    | Boolean | false | no | Option to enable/disable sorting. |
 | settingsModalOptions | Object | see below | no | The options object to be passed to the `$modal` service for widget settings. See the **Custom Widget Settings** section below. |
 | onSettingsClose      | Function | see below | no | The success callback for when a widget settings dialog is closed by the user. See the **Custom Widget Settings** section below. |
 | onSettingsDismiss    | Function | see below | no | The error callback for when a widget settings dialog is dismissed by the user. See the **Custom Widget Settings** section below. |
