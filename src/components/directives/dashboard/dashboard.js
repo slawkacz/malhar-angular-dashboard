@@ -89,6 +89,13 @@ angular.module('ui.dashboard')
           scope.options.stringifyStorage
         );
 
+        /*
+        * Returns current dashboard state
+        */
+        scope.getCurrentWidgets = function() {
+          return scope.widgets;
+        }
+
         /**
          * Instantiates a new widget on the dashboard
          * @param {Object} widgetToInstantiate The definition object of the widget to be instantiated
@@ -273,6 +280,7 @@ angular.module('ui.dashboard')
 
         // expose functionality externally
         // functions are appended to the provided dashboard options
+        scope.options.getCurrentWidgets = scope.getCurrentWidgets;
         scope.options.addWidget = scope.addWidget;
         scope.options.loadWidgets = scope.loadWidgets;
         scope.options.saveDashboard = scope.externalSaveDashboard;
