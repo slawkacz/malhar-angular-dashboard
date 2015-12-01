@@ -447,6 +447,7 @@ angular.module('ui.dashboard')
       $scope.grabResizer = function(e) {
 
         var widget = $scope.widget;
+        var dashboardOptions = $scope.options;
         var widgetElm = $element.find('.widget');
 
         // ignore middle- and right-click
@@ -466,6 +467,7 @@ angular.module('ui.dashboard')
         var pixelHeight = widgetElm.height();
         var widgetStyleWidth = widget.containerStyle.width;
         var widthUnits = widget.widthUnits;
+        var widgetGrid = dashboardOptions.grid || 1;
         var unitWidth = parseFloat(widgetStyleWidth);
 
         // create marquee element for resize action
@@ -480,6 +482,8 @@ angular.module('ui.dashboard')
           var curX = e.clientX;
           var pixelChange = curX - initX;
           var newWidth = pixelWidth + pixelChange;
+          if(widgetGrid)
+            newWidth = Math.floor(newWidth/widgetGrid) * widgetGrid;
           $marquee.css('width', newWidth + 'px');
         };
 
@@ -509,6 +513,8 @@ angular.module('ui.dashboard')
 
       //TODO refactor
       $scope.grabSouthResizer = function(e) {
+        var widget = $scope.widget;
+        var dashboardOptions = $scope.options;
         var widgetElm = $element.find('.widget');
 
         // ignore middle- and right-click
@@ -526,6 +532,7 @@ angular.module('ui.dashboard')
         // Get the current width of the widget and dashboard
         var pixelWidth = widgetElm.width();
         var pixelHeight = widgetElm.height();
+        var widgetGrid = dashboardOptions.grid || 1;
 
         // create marquee element for resize action
         var $marquee = angular.element('<div class="widget-resizer-marquee" style="height: ' + pixelHeight + 'px; width: ' + pixelWidth + 'px;"></div>');
@@ -536,6 +543,8 @@ angular.module('ui.dashboard')
           var curY = e.clientY;
           var pixelChange = curY - initY;
           var newHeight = pixelHeight + pixelChange;
+          if(widgetGrid)
+            newHeight = Math.floor(newHeight/widgetGrid) * widgetGrid;
           $marquee.css('height', newHeight + 'px');
         };
 
