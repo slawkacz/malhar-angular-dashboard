@@ -120,7 +120,7 @@ angular.module('ui.dashboard')
           }
 
           // Instantiation
-          var widget = new WidgetModel(defaultWidgetDefinition, widgetToInstantiate);
+          var widget = new WidgetModel(defaultWidgetDefinition, widgetToInstantiate, scope.options.overrideDataModelOptions || false);
 
           // Add to the widgets array
           scope.widgets.push(widget);

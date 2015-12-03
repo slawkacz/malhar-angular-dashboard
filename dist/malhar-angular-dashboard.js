@@ -120,7 +120,7 @@ angular.module('ui.dashboard')
           }
 
           // Instantiation
-          var widget = new WidgetModel(defaultWidgetDefinition, widgetToInstantiate);
+          var widget = new WidgetModel(defaultWidgetDefinition, widgetToInstantiate, scope.options.overrideDataModelOptions || false);
 
           // Add to the widgets array
           scope.widgets.push(widget);
@@ -859,10 +859,14 @@ angular.module('ui.dashboard')
     };
 
     // constructor for widget model instances
-    function WidgetModel(widgetDefinition, overrides) {
+    function WidgetModel(widgetDefinition, overrides, overrideDataModelOptions) {
   
       // Extend this with the widget definition object with overrides merged in (deep extended).
-      angular.extend(this, defaults(), _.merge(angular.copy(widgetDefinition), overrides));
+      var widgetDef = angular.copy(widgetDefinition);
+      if(overrideDataModelOptions)
+        delete widgetDef['dataModelOptions'];
+
+      angular.extend(this, defaults(), _.merge(widgetDef, overrides));
 
       this.updateContainerStyle(this.style);
 
