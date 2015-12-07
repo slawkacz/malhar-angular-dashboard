@@ -17,10 +17,10 @@
 'use strict';
 
 angular.module('app', [
-    'ngRoute',
-    'ui.dashboard',
-    'btford.markdown'
-  ])
+  'ngRoute',
+  'ui.dashboard',
+  'btford.markdown',
+])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -40,25 +40,37 @@ angular.module('app', [
         controller: 'CustomSettingsDemoCtrl',
         title: 'custom widget settings',
         description: 'This demo showcases overriding the widget settings dialog/modal ' +
-          'for the entire dashboard and for a specific widget. Click on the cog of each ' +
-          'widget to see the custom modal. \n"configurable widget" has "limit" option in the modal ' +
-          'that controls RandomDataModel.'
+        'for the entire dashboard and for a specific widget. Click on the cog of each ' +
+        'widget to see the custom modal. \n"configurable widget" has "limit" option in the modal ' +
+        'that controls RandomDataModel.'
       })
       .when('/explicit-saving', {
         templateUrl: 'app/template/view.html',
         controller: 'ExplicitSaveDemoCtrl',
         title: 'explicit saving',
-        description: 'This demo showcases an option to only save the dashboard state '+
-          'explicitly, e.g. by user input. Notice the "all saved" button in the controls ' +
-          'updates as you make saveable changes.'
+        description: 'This demo showcases an option to only save the dashboard state ' +
+        'explicitly, e.g. by user input. Notice the "all saved" button in the controls ' +
+        'updates as you make saveable changes.'
+      })
+      .when('/editMode', {
+        templateUrl: 'app/template/editMode.html',
+        controller: 'EditModeDemoCtrl',
+        title: 'edit mode',
+        description: 'This demo shows how to use edit mode.'
+      })
+      .when('/gridster', {
+        templateUrl: 'app/template/gridster.html',
+        controller: 'GridsterDemoCtrl',
+        title: 'Gridster mode',
+        description: 'This demo shows how to use gridster.'
       })
       .when('/layouts', {
         templateUrl: 'app/template/layouts.html',
         controller: 'LayoutsDemoCtrl',
         title: 'dashboard layouts',
         description: 'This demo showcases the ability to have "dashboard layouts", ' +
-          'meaning the ability to have multiple arbitrary configurations of widgets. For more ' +
-          'information, take a look at [issue #31](https://github.com/DataTorrent/malhar-angular-dashboard/issues/31)'
+        'meaning the ability to have multiple arbitrary configurations of widgets. For more ' +
+        'information, take a look at [issue #31](https://github.com/DataTorrent/malhar-angular-dashboard/issues/31)'
       })
       .when('/layouts/explicit-saving', {
         templateUrl: 'app/template/layouts.html',
@@ -70,17 +82,17 @@ angular.module('app', [
         redirectTo: '/'
       });
   })
-  .controller('NavBarCtrl', function($scope, $route) {
+  .controller('NavBarCtrl', function ($scope, $route) {
     $scope.$route = $route;
   })
-  .factory('widgetDefinitions', function(RandomDataModel) {
+  .factory('widgetDefinitions', function (RandomDataModel) {
     return [
       {
         name: 'random',
         directive: 'wt-scope-watch',
         attrs: {
           value: 'randomValue'
-        }
+        },
       },
       {
         name: 'time',
@@ -102,10 +114,6 @@ angular.module('app', [
       {
         name: 'fluid',
         directive: 'wt-fluid',
-        size: {
-          width: '50%',
-          height: '250px'
-        }
       }
     ];
   })
@@ -121,13 +129,10 @@ angular.module('app', [
     },
     {
       name: 'time',
-      style: {
-        width: '50%'
-      }
     }
   ])
   .controller('DemoCtrl', function ($scope, $interval, $window, widgetDefinitions, defaultWidgets) {
-    
+
     $scope.dashboardOptions = {
       widgetButtons: true,
       widgetDefinitions: widgetDefinitions,

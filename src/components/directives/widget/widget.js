@@ -51,13 +51,18 @@ angular.module('ui.dashboard')
           widget.dataModel = ds;
           ds.setup(widget, scope);
           ds.init();
-          scope.$on('$destroy', _.bind(ds.destroy,ds));
+          scope.$on('$destroy', _.bind(ds.destroy, ds));
         }
 
         // Compile the widget template, emit add event
         scope.compileTemplate();
         scope.$emit('widgetAdded', widget);
-
+        scope.$on('gridster-item-transition-end', function (event, item) {
+          scope.$emit('dashboard.widget.resized', item);
+        });
+        scope.$on('gridster-item-resized', function (sizes, item) {
+          scope.$emit('dashboard.widget.resized', item);
+        })
       }
 
     };

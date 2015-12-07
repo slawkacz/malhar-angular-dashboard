@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('ui.dashboard', ['ui.bootstrap', 'ui.sortable']);
+angular.module('ui.dashboard', ['ui.bootstrap', 'gridster']);
 
 angular.module('ui.dashboard')
 
@@ -60,17 +60,6 @@ angular.module('ui.dashboard')
 
         // Shallow options
         _.defaults(scope.options, defaults);
-
-        // sortable options
-        var sortableDefaults = {
-          stop: function () {
-            scope.saveDashboard();
-          },
-          handle: '.widget-header:not(.not-sortable)',
-          items: '.widget-container:not(.not-sortable)',
-          distance: 5
-        };
-        scope.sortableOptions = angular.extend({}, sortableDefaults, scope.options.sortableOptions || {});
       }],
       link: function (scope) {
 
@@ -121,7 +110,6 @@ angular.module('ui.dashboard')
 
           // Instantiation
           var widget = new WidgetModel(defaultWidgetDefinition, widgetToInstantiate, scope.options.overrideDataModelOptions || false);
-
           // Add to the widgets array
           scope.widgets.push(widget);
           if (!doNotSave) {
@@ -286,9 +274,12 @@ angular.module('ui.dashboard')
         scope.options.saveDashboard = scope.externalSaveDashboard;
         scope.options.removeWidget = scope.removeWidget;
         scope.options.openWidgetSettings = scope.openWidgetSettings;
-
         // save state
         scope.$on('widgetChanged', function (event) {
+          event.stopPropagation();
+          scope.saveDashboard();
+        });
+        scope.$on('dashboard.widget.resized', function (event) {
           event.stopPropagation();
           scope.saveDashboard();
         });
