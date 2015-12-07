@@ -22,7 +22,7 @@
         <button ng-if="options.storage && options.explicitSave && !options.hideSaveButton" ng-click="options.saveDashboard()" class="btn btn-success" ng-disabled="!options.unsavedChangeCount">{{ !options.unsavedChangeCount ? "all saved" : "save changes (" + options.unsavedChangeCount + ")" }}</button>
         <button ng-if="!options.hideClearButton" ng-click="clear();" type="button" class="btn btn-info">Clear</button>
     </div>
-    <div ng-model="widgets" class="dashboard-widget-area" gridster>
+    <div ng-model="widgets" class="dashboard-widget-area" gridster="gridsterOpts">
         <div gridster-item row="widget.size.row" col="widget.size.col" size-x="widget.size.x" size-y="widget.size.y" ng-repeat="widget in widgets"  class="widget-container" widget>
             <div class="widget panel panel-default">
                 <div class="widget-header panel-heading">
