@@ -283,6 +283,10 @@ angular.module('ui.dashboard')
           event.stopPropagation();
           scope.saveDashboard();
         });
+        scope.$on('dashboard.widget.dragend', function (event) {
+          event.stopPropagation();
+          scope.saveDashboard();
+        });
       }
     };
   }]);

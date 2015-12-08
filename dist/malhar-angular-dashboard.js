@@ -283,6 +283,10 @@ angular.module('ui.dashboard')
           event.stopPropagation();
           scope.saveDashboard();
         });
+        scope.$on('dashboard.widget.dragend', function (event) {
+          event.stopPropagation();
+          scope.saveDashboard();
+        });
       }
     };
   }]);
@@ -352,7 +356,7 @@ angular.module('ui.dashboard')
         scope.compileTemplate();
         scope.$emit('widgetAdded', widget);
         scope.$on('gridster-item-transition-end', function (event, item) {
-          scope.$emit('dashboard.widget.resized', item);
+          scope.$emit('dashboard.widget.dragend', item);
         });
         scope.$on('gridster-item-resized', function (sizes, item) {
           scope.$emit('dashboard.widget.resized', item);
