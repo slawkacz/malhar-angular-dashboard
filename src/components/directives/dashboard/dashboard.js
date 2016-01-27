@@ -141,10 +141,11 @@ angular.module('ui.dashboard')
             scope.options.settingsModalOptions);
 
           // Ensure widget is resolved
-          options.resolve = {
-            widget: function () {
+          if(!options.resolve)
+            options.resolve = {};
+          
+          options.resolve.widget = function () {
               return widget;
-            }
           };
           
           // Create the modal
