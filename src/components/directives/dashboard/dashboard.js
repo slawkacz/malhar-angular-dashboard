@@ -133,7 +133,7 @@ angular.module('ui.dashboard')
          * @param  {Object} widget The widget instance object
          */
         scope.openWidgetSettings = function (widget) {
-
+          ++scope.options.unsavedChangeCount;    
           // Set up $modal options 
           var options = _.defaults(
             { scope: scope },
